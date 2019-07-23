@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+    {% block code_block %}
+
+        <h1>Result</h1>
+        <h3><strong>Algorithm : </strong> {{algorithm}}</h3>
+        <h4>Algorithm Accuracy : {{accuracy*100}}% </h4>
+        </br>
+        <h4>Given review : {{sentiment}}</h4>
+
+    {% endblock code_block %}
