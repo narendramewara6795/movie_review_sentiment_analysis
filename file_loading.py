@@ -1,18 +1,15 @@
 import pandas as pd
 import glob
-pd.set_option('display.max_columns', None)
 
-trainPos = glob.glob("/home/sunbeam/Documents/aclImdb_v1/aclImdb/train/pos/*.txt")
-trainNeg = glob.glob("/home/sunbeam/Documents/aclImdb_v1/aclImdb/train/neg/*.txt")
-trainUnsup = glob.glob("/home/sunbeam/Documents/aclImdb_v1/aclImdb/train/unsup/*.txt")
-testPos = glob.glob("/home/sunbeam/Documents/aclImdb_v1/aclImdb/test/pos/*.txt")
-testNeg = glob.glob("/home/sunbeam/Documents/aclImdb_v1/aclImdb/test/neg/*.txt")
+trainPos = glob.glob("./dataset/aclImdb/train/pos/*.txt")
+trainNeg = glob.glob("./dataset/aclImdb/train/neg/*.txt")
+testPos = glob.glob("./dataset/aclImdb/test/pos/*.txt")
+testNeg = glob.glob("./dataset/aclImdb/test/neg/*.txt")
 
-url_train_pos = pd.read_csv("/home/sunbeam/Documents/aclImdb_v1/aclImdb/train/urls_pos.txt",header=None)
-url_train_neg = pd.read_csv("/home/sunbeam/Documents/aclImdb_v1/aclImdb/train/urls_neg.txt",header=None)
-url_train_unsup = pd.read_csv("/home/sunbeam/Documents/aclImdb_v1/aclImdb/train/urls_unsup.txt",header=None)
-url_test_pos = pd.read_csv("/home/sunbeam/Documents/aclImdb_v1/aclImdb/test/urls_pos.txt",header=None)
-url_test_neg = pd.read_csv("/home/sunbeam/Documents/aclImdb_v1/aclImdb/test/urls_neg.txt",header=None)
+url_train_pos = pd.read_csv("./dataset/aclImdb/train/urls_pos.txt",header=None)
+url_train_neg = pd.read_csv("./dataset/aclImdb/train/urls_neg.txt",header=None)
+url_test_pos = pd.read_csv("./dataset/aclImdb/test/urls_pos.txt",header=None)
+url_test_neg = pd.read_csv("./dataset/aclImdb/test/urls_neg.txt",header=None)
 
 def get_movieIds(urls):
     movieIds = []
@@ -31,7 +28,7 @@ def function(param,urls):
         text = open(url, "r")
         data = text.read()
         reviews.append(data)
-        fileName = param[index].split("/")[8]
+        fileName = param[index].split("/")[5]
         files.append(fileName)
         fileNames = fileName.split("_")
         id.append(int(fileNames[0]))
@@ -65,6 +62,3 @@ train = pd.concat([df1,df2])
 train.to_csv(f"./dataset/train.csv", index=False)
 test = df = pd.concat([df3,df4])
 test.to_csv(f"./dataset/test.csv", index=False)
-
-movie_dataset = pd.concat([df1,df2,df3,df4])
-movie_dataset.to_csv(f"./dataset/movie_dataset.csv", index=False)

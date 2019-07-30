@@ -14,9 +14,9 @@ def sentimentAnalysis():
     if algorithm == 'lr':
         classifier = maincode.linearRegressor
         algorithm = 'Linear Regression'
-    # elif algorithm == 'lgr':
-    #     classifier = maincode.logisticRegressor
-    #     algorithm = 'Logistic Regression'
+    elif algorithm == 'lgr':
+        classifier = maincode.logisticRegressor
+        algorithm = 'Logistic Regression'
     elif algorithm == 'rf':
         classifier = maincode.rfClassifier
         algorithm = 'Random Forest Classification'

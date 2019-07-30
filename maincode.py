@@ -11,16 +11,13 @@ from sklearn.linear_model import LogisticRegression, LinearRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import MultinomialNB, GaussianNB
 from sklearn.metrics import accuracy_score
+from sklearn.svm import SVC
 
 file = open("./dataset/contraction_dict.pkl","rb")
 contrations_dictionary = pickle.load(file)
 
-# train = pd.read_csv("./dataset/train.csv")
-# test = pd.read_csv("./dataset/test.csv")
-
-movie_dataset = pd.read_csv("./dataset/movie_dataset.csv")
-train = movie_dataset.iloc[:40000]
-test = movie_dataset.iloc[40000:]
+train = pd.read_csv("./dataset/train.csv")
+test = pd.read_csv("./dataset/test.csv")
 
 train_review = train["review"]
 test_review = test["review"]
@@ -86,7 +83,7 @@ cleaned_test_review = []
 for index in range(len(train_review)):
     cleaned_train_review.append(preprocessing(train_review[index],True,True))
 for index in range(len(test_review)):
-    cleaned_test_review.append(preprocessing(test_review[40000 + index],True,True))
+    cleaned_test_review.append(preprocessing(test_review[index],True,True))
 print("contraction word count : {}".format(contraction_word_count))
 
 #------------------Vectorization------------------------------------------------------------
@@ -122,8 +119,9 @@ def mnbClassification():
     return mnb
 
 
+
 linearRegressor = linearRegressionClassification()
-# logisticRegressor = logisticRegressionClassification()
+logisticRegressor = logisticRegressionClassification()
 rfClassifier = randomForestClassification()
 mnbClassifier = mnbClassification()
 
@@ -164,9 +162,13 @@ def find_sentiment(classifier,review):
     print(f"sentiment : {sentiment}")
     return sentiment
 
-
-
-
+# from wordcloud import WordCloud
+# import matplotlib.pyplot as plt
+# wordcloud = WordCloud(width=1600, height=800, max_font_size=200).generate(str(cleaned_test_review))
+# plt.figure(figsize=(12,10))
+# plt.imshow(wordcloud, interpolation='bilinear')
+# plt.axis("off")
+# plt.show()
 
 
 
